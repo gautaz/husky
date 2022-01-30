@@ -2,10 +2,14 @@ import cp = require('child_process')
 import fs = require('fs')
 import p = require('path')
 
-interface Logger {
+interface Options {
   log: (msg: string) => void
-  warn: (msg: string) => void
   error: (msg: string) => void
+}
+
+interface CustomOptions {
+  log?: (msg: string) => void
+  error?: (msg: string) => void
 }
 
 interface Husky {
@@ -16,9 +20,8 @@ interface Husky {
 }
 
 // Default logger
-const defaultLogger: Logger = {
+const defaultOptions: Options = {
   log: (msg: string): void => console.log(`husky - ${msg}`),
-  warn: (msg: string): void => console.warn(`husky - ${msg}`),
   error: (msg: string): void => console.error(`husky - ${msg}`),
 }
 
@@ -28,7 +31,8 @@ const git = (args: string[]): cp.SpawnSyncReturns<Buffer> =>
 
 const defaultHusky = configure()
 
-export function configure(logger = defaultLogger): Husky {
+export function configure(customOptions: CustomOptions = {}): Husky {
+  const options: Options = { ...defaultOptions, ...customOptions }
   return {
     install(dir = '.husky'): void {
       // Ensure that we're inside a git repository
@@ -70,11 +74,11 @@ export function configure(logger = defaultLogger): Husky {
           throw error
         }
       } catch (e) {
-        logger.error('Git hooks failed to install')
+        options.error('Git hooks failed to install')
         throw e
       }
 
-      logger.log('Git hooks installed')
+      options.log('Git hooks installed')
     },
 
     set(file: string, cmd: string): void {
@@ -95,13 +99,13 @@ ${cmd}
         { mode: 0o0755 },
       )
 
-      logger.log(`created ${file}`)
+      options.log(`created ${file}`)
     },
 
     add(file: string, cmd: string): void {
       if (fs.existsSync(file)) {
         fs.appendFileSync(file, `${cmd}\n`)
-        logger.log(`updated ${file}`)
+        options.log(`updated ${file}`)
       } else {
         this.set(file, cmd)
       }
