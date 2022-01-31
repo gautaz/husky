@@ -95,7 +95,7 @@ export function configure(customOptions: CustomOptions = {}): Husky {
 . "$(dirname -- "$0")/_/husky.sh"
 
 ${cmd}
-        `,
+`,
         { mode: 0o0755 },
       )
 
