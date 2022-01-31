@@ -279,6 +279,18 @@ const isCi = process.env.CI !== undefined
 if (!isCi) {
   require('husky').install()
 }
+
+
+You can also use your own logging functions if needed:
+
+
+// prepare.js
+const { configure } = require('husky)
+const husky = configure({
+  log: (msg) => console.log(msg),
+  error: (msg) => console.error(`Something went bad: ${msg}`)
+})
+husky.install()
 ```
 
 ### With env variables
