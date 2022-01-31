@@ -1,6 +1,6 @@
 {
   "name": "@gautaz/husky",
-  "version": "7.0.4",
+  "version": "7.0.4-rel.0",
   "description": "Modern native Git hooks made easy",
   "keywords": [
     "git",
