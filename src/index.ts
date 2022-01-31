@@ -92,10 +92,10 @@ export function configure(customOptions: CustomOptions = {}): Husky {
       fs.writeFileSync(
         file,
         `#!/bin/sh
-        . "$(dirname "$0")/_/husky.sh"
+  . "$(dirname "$0")/_/husky.sh"
 
-        ${cmd}
-        `,
+${cmd}
+`,
         { mode: 0o0755 },
       )
 
