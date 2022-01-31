@@ -4,7 +4,7 @@ install
 
 cat > index.js << EOL
 process.env.PATH = ''
-require('husky').install()
+require('@gautaz/husky').install()
 EOL
 expect 0 "node index.js" 
 

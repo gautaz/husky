@@ -10,7 +10,7 @@ expect_hooksPath_to_be ".husky"
 # Test pre-commit
 git add package.json
 echo '
-const { configure } = require("husky");
+const { configure } = require("@gautaz/husky");
 const { install, set, add } = configure({
 log: (msg) => console.log(`HUSKY LOG - ${msg}`),
 });
