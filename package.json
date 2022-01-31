@@ -1,5 +1,5 @@
 {
-  "name": "husky",
+  "name": "@gautaz/husky",
   "version": "7.0.4",
   "description": "Modern native Git hooks made easy",
   "keywords": [
