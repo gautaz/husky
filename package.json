@@ -18,6 +18,9 @@
     "lib",
     "husky.sh"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc",
     "test": "sh test/all.sh",
