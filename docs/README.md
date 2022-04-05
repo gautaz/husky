@@ -280,11 +280,11 @@ const isCi = process.env.CI !== undefined
 if (!isCi) {
   require('husky').install()
 }
-
+```
 
 You can also use your own logging functions if needed:
 
-
+```js
 // prepare.js
 const { configure } = require('husky)
 const husky = configure({
